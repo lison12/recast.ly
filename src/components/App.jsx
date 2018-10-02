@@ -11,9 +11,10 @@ class App extends React.Component {
     };
   }
 
-  onClick(video) {
+  thatClick(video) {
     this.setState({
-      currentVideo: video
+      currentVideo: video,
+      videos: exampleVideoData
     });
   }
 
@@ -22,7 +23,8 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            {/*<div><h5><em>search</em> view goes here</h5></div>*/}
+            {/*<Search videos={this.state.videos} thatClick={this.thatClick.bind(this)}  /> */}
           </div>
         </nav>
         <div className="row">
@@ -32,7 +34,7 @@ class App extends React.Component {
           </div>
           <div className="col-md-5">
             {/*<div><h5><em>videoList</em> VideoList</h5></div>*/}
-            <VideoList videos={this.state.videos} onClick={this.onClick.bind(this)} /> 
+            <VideoList videos={this.state.videos} thatClick={this.thatClick.bind(this)} /> 
           </div>
         </div>
       </div>
