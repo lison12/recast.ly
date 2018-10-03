@@ -1,6 +1,8 @@
 import VideoPlayer from "./VideoPlayer.js";
 import VideoList from "./VideoList.js";
 import exampleVideoData from "../data/exampleVideoData.js";
+import Search from "./Search.js";
+import YOUTUBE_API_KEY from "../config/youtube.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -9,13 +11,28 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0],
       videos: exampleVideoData
     };
+    // this.getVideo = this.getVideo.bind(this);
   }
 
   thatClick(video) {
     this.setState({
-      currentVideo: video,
-      videos: exampleVideoData
+      currentVideo: video
+      // videos: exampleVideoData
     });
+  }
+  
+  getVideo(query) {
+    this.props.searchYouTube(
+      {max: 5, key: YOUTUBE_API_KEY, query: query}, (data) => {
+        this.setState({
+          currentVideo: data[0],
+          videos: data
+        });
+      });
+  }
+
+  componentDidMount() {
+    this.getVideo('elephant');
   }
 
   render() {
@@ -24,7 +41,7 @@ class App extends React.Component {
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             {/*<div><h5><em>search</em> view goes here</h5></div>*/}
-            {/*<Search videos={this.state.videos} thatClick={this.thatClick.bind(this)}  /> */}
+            {<Search getVideo={this.getVideo.bind(this)} /> }
           </div>
         </nav>
         <div className="row">
@@ -40,6 +57,41 @@ class App extends React.Component {
       </div>
     );
   }
+  
+  // var structure = {
+  //   kind: 'youtube#searchResult',
+  //   etag: '',
+  //   id: {
+  //     kind: '',
+  //     videoId: ''
+  //   },
+  //   snippet: {
+  //     publishedAt: '',
+  //     channelId: '',
+  //     title: '',
+  //     description: '',
+  //     thumbnails: {
+  //       default: {
+  //         url: '',
+  //         width: ,
+  //         height: 
+  //       },
+  //       medium: {
+  //         url: '',
+  //         width: ,
+  //         height: 
+  //       },
+  //       high: {
+  //         url: '',
+  //         width: ,
+  //         height: 
+  //       }
+  //     },
+  //     channelTitle: '',
+  //     liveBroadcastContent: ''
+  //   }
+  // }
+
 }
 
 

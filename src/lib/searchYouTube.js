@@ -2,7 +2,7 @@ var searchYouTube = (options, callback) => {
   // TODO
 
   // var GET = function(options, successCB, errorCB = null) {
-  $.ajax({
+  $.ajax({    
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',
     data: {maxResults: options.max,
@@ -12,7 +12,7 @@ var searchYouTube = (options, callback) => {
       type: 'video'},
     success: (data) => callback(data.items),
     error: function(error) {
-      console.error('chatterbox: Failed to fetch messages', error);
+      console.error('searchYoutube: Failed to fetch messages', error);
     }
   });
   // };
