@@ -2,7 +2,7 @@
 
 var Search = (props) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" onChange={(event) => props.getVideo(event.target.value)}/>
+    <input className="form-control" type="text" onChange={(event) => props.debounceGetVideo(event.target.value)}/>
     <button className="btn hidden-sm-down" >
       <span className="glyphicon glyphicon-search"></span>
     </button>

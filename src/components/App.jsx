@@ -22,6 +22,7 @@ class App extends React.Component {
   }
   
   getVideo(query) {
+    
     this.props.searchYouTube(
       {max: 5, key: YOUTUBE_API_KEY, query: query}, (data) => {
         this.setState({
@@ -29,6 +30,10 @@ class App extends React.Component {
           videos: data
         });
       });
+  }
+  
+  debounceGetVideo(query) {
+    _.debounce(() => this.getVideo(query), 500)();
   }
 
   componentDidMount() {
@@ -41,7 +46,7 @@ class App extends React.Component {
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             {/*<div><h5><em>search</em> view goes here</h5></div>*/}
-            {<Search getVideo={this.getVideo.bind(this)} /> }
+            {<Search debounceGetVideo={this.debounceGetVideo.bind(this)} /> }
           </div>
         </nav>
         <div className="row">
